@@ -96,17 +96,16 @@ const Pad = ({ sound, volume, setcurrentsound, currentsound }) => {
   const [active, setactive] = useState(false);
 
   useEffect(() => {
+    const handleKeypress = (e) => {
+      if (e.keyCode === sound.keyCode) {
+        playSound();
+      }
+    };
     document.addEventListener("keydown", handleKeypress);
     return () => {
-      document.removeEventListener("keydown");
+      document.removeEventListener("keydown", handleKeypress);
     };
   }, []);
-
-  const handleKeypress = (e) => {
-    if (e.keyCode === sound.keyCode) {
-      playSound();
-    }
-  };
 
   const playSound = () => {
     const audioTag = document.getElementById(sound.keyTrigger);
