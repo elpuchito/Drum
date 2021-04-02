@@ -95,18 +95,6 @@ const App = () => {
 const Pad = ({ sound, volume, setcurrentsound, currentsound }) => {
   const [active, setactive] = useState(false);
 
-  useEffect(() => {
-    const handleKeypress = (e) => {
-      if (e.keyCode === sound.keyCode) {
-        playSound();
-      }
-    };
-    document.addEventListener("keydown", handleKeypress);
-    return () => {
-      document.removeEventListener("keydown", handleKeypress);
-    };
-  }, []);
-
   const playSound = () => {
     const audioTag = document.getElementById(sound.keyTrigger);
     audioTag.currenTime = 0;
@@ -117,6 +105,18 @@ const Pad = ({ sound, volume, setcurrentsound, currentsound }) => {
     setTimeout(() => setactive(false), 300);
     setcurrentsound(() => sound.id);
   };
+  useEffect(() => {
+    const handleKeypress = (e) => {
+      if (e.keyCode === sound.keyCode) {
+        playSound();
+      }
+    };
+    document.addEventListener("keydown", handleKeypress);
+    return () => {
+      document.removeEventListener("keydown", handleKeypress);
+    };
+    // eslint-disable-line react-hooks/exhaustive-deps;
+  }, []);
 
   return (
     <div
