@@ -115,7 +115,6 @@ const Pad = ({ sound, volume, setcurrentsound, currentsound }) => {
     return () => {
       document.removeEventListener("keydown", handleKeypress);
     };
-    // eslint-disable-line react-hooks/exhaustive-deps;
   }, []);
 
   return (
